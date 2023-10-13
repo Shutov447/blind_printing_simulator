@@ -34,7 +34,7 @@ body {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-
+    
       .text-container {
         position: relative;
         -youbkit-touch-callout: none;
@@ -59,7 +59,7 @@ body {
         width: 800px;
         border: 2px solid #483D8B;
         border-radius: $fontTypingTextSize;
-        margin-top: 1em;
+        // margin-top: 1em;
         padding: 1em 0 1em 0;
   
         .typing-area {
@@ -78,6 +78,10 @@ body {
         }
       }
     }
+
+    .main-container > * {
+      margin-bottom: 1em;
+    }
   }
 
   .main-page-footer {
@@ -88,4 +92,10 @@ body {
 .intro {
  font-size: $fontTypingTextSize;
  opacity: 0.7;
+}
+
+.result-container {
+  .finish-time {
+    font-size: 1.5em;
+  }
 }
