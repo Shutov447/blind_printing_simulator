@@ -142,7 +142,6 @@ function checkTextValidation(textForTyping) {
         console.log('start');
         minutsForTimer = 0;
         secondsForTimer = 0;
-        // timer();
         timerIdFunc();
         startTime = new Date;
         startTime = startTime.getTime();
@@ -151,25 +150,51 @@ function checkTextValidation(textForTyping) {
     }
   };
   
-  function timerIdFunc() {
-    timerID = setTimeout(function run() {
-      timer();
-      setTimeout(run, 1000);
-    }, 1000);
-  }
-  
   function timer() {
     let timerElem = document.getElementById('timer');
     if (timerElem) {
-      console.log('after 1 sec');
-      console.log(minutsForTimer, secondsForTimer);
+      secondsForTimer = +secondsForTimer;
       secondsForTimer++;
+      minutsForTimer = +minutsForTimer;
       if (secondsForTimer == 60) {
         minutsForTimer++;
         secondsForTimer = 0;
       }
+      
+      while (true) {
+        if (minutsForTimer == 0) {
+          minutsForTimer = '00';
+          break;
+        }
+        if (minutsForTimer > 0 && minutsForTimer < 10) {
+          minutsForTimer = `0${minutsForTimer}`;
+          break;
+        }
+        if (minutsForTimer >= 10) {
+          break;
+        }
+      }
+      
+      while (true) {
+        if (secondsForTimer == 0) {
+          secondsForTimer = '00';
+          break;
+        }
+        if (secondsForTimer > 0 && secondsForTimer < 10) {
+          secondsForTimer = `0${secondsForTimer}`;
+          break;
+        }
+        if (secondsForTimer >= 10) {
+          break;
+        }
+      }
+      
       timerElem.textContent = `${minutsForTimer}:${secondsForTimer}`;
     }
+  }
+
+  function timerIdFunc() {
+    timerID = setInterval(timer, 1000);
   }
 
   function showResult() {
@@ -183,8 +208,7 @@ function checkTextValidation(textForTyping) {
   
   function removeTypingArea(){
     if (i == text.children.length) {
-      timer = function(){};// обнуляю функцию, чтобы время на таймере не перенеслось на следующую попытку
-      clearTimeout(timerID);
+      clearInterval(timerID);
       mainContainer.remove();
       endTimer();
       showResult();

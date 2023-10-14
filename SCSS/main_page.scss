@@ -59,7 +59,6 @@ body {
         width: 800px;
         border: 2px solid #483D8B;
         border-radius: $fontTypingTextSize;
-        // margin-top: 1em;
         padding: 1em 0 1em 0;
   
         .typing-area {
@@ -98,4 +97,8 @@ body {
   .finish-time {
     font-size: 1.5em;
   }
+}
+
+.timer {
+  font-size: 1.5em;
 }
