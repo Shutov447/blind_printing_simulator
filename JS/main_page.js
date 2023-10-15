@@ -136,21 +136,21 @@ function checkTextValidation(textForTyping) {
     }
   });
 
-  function showResult() {
+  function showResult(timerElem) {
     let main = document.getElementById('main-page-main');
     let resultContainer = document.createElement('div');
     resultContainer.setAttribute('id', 'result-container');
     resultContainer.setAttribute('class', 'result-container');
     main.append(resultContainer);
-    timer.showResultTime();
+    timer.endTimer(timerElem);
   }
   
   function removeTypingArea(){
     if (i == text.children.length) {
       clearInterval(timerID);
+      let timerElem = document.getElementById('timer');
       mainContainer.remove();
-      timer.endTimer();
-      showResult();
+      showResult(timerElem);
       startTypingText();
     }
   }

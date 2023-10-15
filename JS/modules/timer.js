@@ -3,8 +3,7 @@ import {exceptions} from './exceptions.js';
 let timerID;
 let minutsForTimer = 0;
 let secondsForTimer = 0;
-let startTime;
-let endTime;
+
 function timerIdFunc() {
   timerID = setInterval(timer.timer, 1000);
 };
@@ -71,32 +70,18 @@ let timer = {
         minutsForTimer = 0;
         secondsForTimer = 0;
         timerIdFunc();
-        startTime = new Date;
-        startTime = startTime.getTime();
         typingArea.removeEventListener('keydown', startTimerEvent);
       }
     }
   },
 
-  endTimer() {
+  endTimer(timerElem) {
     console.log('end');
-    endTime = new Date;
-    endTime = endTime.getTime();
-  },
-  
-  showResultTime() {
-    const time = endTime - startTime;
-    console.log(time);
-    let seconds = Math.floor(time / 1_000);
-    let minuts = Math.floor(seconds / 60);
-    seconds %= 60;
     let resultContainer = document.getElementById('result-container');
     let finishTime = document.createElement('div');
     finishTime.setAttribute('id', 'finish-time');
     finishTime.setAttribute('class', 'finish-time');
-    if (minuts < 10) minuts = '0' + minuts;
-    if (seconds < 10) seconds = '0' + seconds;
-    finishTime.textContent = `Время прохождения: ${minuts}:${seconds}`;
+    finishTime.textContent = `${timerElem.textContent}`;
     resultContainer.append(finishTime);
   },
 };
