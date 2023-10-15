@@ -10,6 +10,8 @@
 // сделаю это в будущем
 // ИЛИ ЛУЧШЕ БУДЕТ УСТАНОВИТЬ ОДНО ОБЩЕЕ ЗНАЧЕНИЕ ШИРИНЫ ДЛЯ МАЛЕНЬНИХ,
 // БОЛЬШИХ И ОСТАЛЬНЫХ СИМВОЛОВ
+import {exceptions} from './modules/exceptions.js';
+import timer, {timerID} from './modules/timer.js';
 
 startTypingText();
 // Неважно, насколько мы хороши в программировании, иногда наши скрипты содержат ошибки.
@@ -83,7 +85,7 @@ function createText(textForTyping) {
 
 function checkTextValidation(textForTyping) {
   let text = createText(textForTyping);
-  createTimer();
+  timer.createTimer();
   focusTypingArea();
   
   let mainContainer = document.getElementById('main-container');
@@ -93,7 +95,7 @@ function checkTextValidation(textForTyping) {
   let textChildCoords;
   let letterAccumulator = 0;
   
-  startTimer();
+  timer.startTimer();
 
   typingArea.addEventListener('keydown', function(event) {
     if (event.key == 'Backspace') {
@@ -134,83 +136,20 @@ function checkTextValidation(textForTyping) {
     }
   });
 
-  // function startTimer() {
-  //   let typingArea = document.getElementById('typing-area');
-  //   typingArea.addEventListener('keydown', startTimerEvent);
-  //   function startTimerEvent(event) {
-  //     if (!exceptions.has(event.key)) {
-  //       console.log('start');
-  //       minutsForTimer = 0;
-  //       secondsForTimer = 0;
-  //       timerIdFunc();
-  //       startTime = new Date;
-  //       startTime = startTime.getTime();
-  //       typingArea.removeEventListener('keydown', startTimerEvent);
-  //     }
-  //   }
-  // };
-  
-  // function timer() {
-  //   let timerElem = document.getElementById('timer');
-  //   if (timerElem) {
-  //     secondsForTimer = +secondsForTimer;
-  //     secondsForTimer++;
-  //     minutsForTimer = +minutsForTimer;
-  //     if (secondsForTimer == 60) {
-  //       minutsForTimer++;
-  //       secondsForTimer = 0;
-  //     }
-      
-  //     while (true) {
-  //       if (minutsForTimer == 0) {
-  //         minutsForTimer = '00';
-  //         break;
-  //       }
-  //       if (minutsForTimer > 0 && minutsForTimer < 10) {
-  //         minutsForTimer = `0${minutsForTimer}`;
-  //         break;
-  //       }
-  //       if (minutsForTimer >= 10) {
-  //         break;
-  //       }
-  //     }
-      
-  //     while (true) {
-  //       if (secondsForTimer == 0) {
-  //         secondsForTimer = '00';
-  //         break;
-  //       }
-  //       if (secondsForTimer > 0 && secondsForTimer < 10) {
-  //         secondsForTimer = `0${secondsForTimer}`;
-  //         break;
-  //       }
-  //       if (secondsForTimer >= 10) {
-  //         break;
-  //       }
-  //     }
-      
-  //     timerElem.textContent = `${minutsForTimer}:${secondsForTimer}`;
-  //   }
-  // }
-
-  // function timerIdFunc() {
-  //   timerID = setInterval(timer, 1000);
-  // }
-
   function showResult() {
     let main = document.getElementById('main-page-main');
     let resultContainer = document.createElement('div');
     resultContainer.setAttribute('id', 'result-container');
     resultContainer.setAttribute('class', 'result-container');
     main.append(resultContainer);
-    showResultTime();
+    timer.showResultTime();
   }
   
   function removeTypingArea(){
     if (i == text.children.length) {
       clearInterval(timerID);
       mainContainer.remove();
-      endTimer();
+      timer.endTimer();
       showResult();
       startTypingText();
     }
@@ -253,72 +192,3 @@ function verificationBefore(event, i) {
 function verificationAfter(event, i) {
   console.log(`после ${event.key}: ${i}`);
 }
-
-// function createTimer() {
-//   let mainContainer = document.getElementById('main-container');
-//   let timer = document.createElement('div');
-//   timer.setAttribute('id', 'timer');
-//   timer.setAttribute('class', 'timer');
-//   timer.textContent = '00:00';
-//   mainContainer.append(timer);
-// }
-
-// function endTimer() {
-//   console.log('end');
-//   endTime = new Date;
-//   endTime = endTime.getTime();
-// };
-
-// function showResultTime() {
-//   const time = endTime - startTime;
-//   console.log(time);
-//   let seconds = Math.floor(time / 1_000);
-//   let minuts = Math.floor(seconds / 60);
-//   seconds %= 60;
-//   let resultContainer = document.getElementById('result-container');
-//   let finishTime = document.createElement('div');
-//   finishTime.setAttribute('id', 'finish-time');
-//   finishTime.setAttribute('class', 'finish-time');
-//   if (minuts < 10) minuts = '0' + minuts;
-//   if (seconds < 10) seconds = '0' + seconds;
-//   finishTime.textContent = `Время прохождения: ${minuts}:${seconds}`;
-//   resultContainer.append(finishTime);
-// };
-
-// let timerID;
-// let minutsForTimer = 0;
-// let secondsForTimer = 0;
-// let startTime;
-// let endTime;
-let exceptions = [
-  'Shift',
-  'Meta',
-  'Tab',
-  'Alt',
-  'CapsLock',
-  'Escape',
-  'Control',
-  'ContextMenu',
-  'Enter',
-  'Backspace',
-  'Delete',
-  'Pause',
-  'F1',
-  'F2',
-  'F3',
-  'F4',
-  'F5',
-  'F6',
-  'F7',
-  'F8',
-  'F9',
-  'F10',
-  'F11',
-  'F12',
-  'Insert',
-  'End',
-  'Home',
-  'PrintScreen',
-  'ScrollLock',
-];
-exceptions = new Set(exceptions.sort()); // не уверен в полезности этой строки
