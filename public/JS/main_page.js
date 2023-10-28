@@ -13,10 +13,26 @@
 import { exceptions } from './utilities/exceptions.js';
 import timer, { timerID } from './utilities/timer.js';
 
+let textNumber = 0;
+
+async function textRequest(screen) {
+  let res = await fetch(
+    'http://localhost:8000/public/JSON/texts_for_typing.json', {
+      method: 'GET',
+    }
+  );
+  let resJson = await res.json();
+  // console.log(resJson.text);
+  console.log(resJson[textNumber].text);
+
+  if (screen) screen.remove();
+  checkTextValidation(resJson[textNumber++].text);
+  autoFocusTypingArea();
+}
+
 startTypingText();
 
 function startTypingText() {
-  // тут же будет функция для получения текста с какго-нибудь сайта
   let main = document.getElementById('main-page-main');
   let intro = document.getElementById('intro');
   let resultContainer = document.getElementById('result-container');
@@ -26,11 +42,13 @@ function startTypingText() {
   function forMainEvent(event) {
     if (event) {
       main.removeEventListener('click', forMainEvent);
-      if (resultContainer) resultContainer.remove();
-      if (intro) intro.remove();
-      checkTextValidation('Ждем текст...');
-      autoFocusTypingArea();
+      loadScreen(resultContainer ?? intro);
+      textRequest(resultContainer ?? intro);
     }
+  }
+  
+  function loadScreen(screen) {
+    screen.textContent = 'Ждем загрузки текста...';
   }
 }
 
@@ -52,7 +70,6 @@ function createText(textForTyping) {
   text.setAttribute('class', 'text');
   textContainer.append(text);
 
-  textForTyping = textForTyping.trim();
   let letterArr = textForTyping.split('');
 
   for (let i = 0; i < letterArr.length; i++) {
@@ -191,14 +208,3 @@ function verificationBefore(event, i) {
 function verificationAfter(event, i) {
   console.log(`после ${event.key}: ${i}`);
 }
-
-async function textRequest() {
-  let res = await fetch(
-    'http://localhost:8000/public/JSON/texts_for_typing.json'
-  );
-  console.log(await res.json());
-  console.log('from main_page.js');
-
-  return res;
-}
-textRequest();
