@@ -1,15 +1,5 @@
 'use strict';
 
-// обнаружил проблему: когда набираешь текст он двигается и так получается,
-// что когда нажимаешь пробел(space), а в тексте другой символ отличный от пробела,
-// то размеры берутся у символа который в тексе(не в input),
-// и поэтому происходит смещение самой середины набора текста влево
-// (textMovementLeft(), textMovementRight()),
-// но это фиксится простым удалением самого input`а и получением размеров нажатого символа,
-// а событие 'keydown' ставится куда-то(еще не придумал))).
-// сделаю это в будущем
-// ИЛИ ЛУЧШЕ БУДЕТ УСТАНОВИТЬ ОДНО ОБЩЕЕ ЗНАЧЕНИЕ ШИРИНЫ ДЛЯ МАЛЕНЬНИХ,
-// БОЛЬШИХ И ОСТАЛЬНЫХ СИМВОЛОВ
 import { exceptions } from './utilities/exceptions.js';
 import timer, { timerID } from './utilities/timer.js';
 
@@ -17,7 +7,8 @@ let textNumber = 0;
 
 async function textRequest(screen) {
   let res = await fetch(
-    'http://localhost:8000/public/JSON/texts_for_typing.json', {
+    'http://localhost:8000/public/JSON/texts_for_typing.json',
+    {
       method: 'GET',
     }
   );
@@ -46,7 +37,7 @@ function startTypingText() {
       textRequest(resultContainer ?? intro);
     }
   }
-  
+
   function loadScreen(screen) {
     screen.textContent = 'Ждем загрузки текста...';
   }
@@ -75,7 +66,6 @@ function createText(textForTyping) {
   for (let i = 0; i < letterArr.length; i++) {
     let letter = document.createElement('div');
     letter.textContent = letterArr[i];
-    // letter.style.width = 30 + 'px';
 
     if (letter.textContent != ' ') {
       text.append(letter);
@@ -176,15 +166,18 @@ function checkTextValidation(textForTyping) {
 
   function textMovementLeft() {
     textChildCoords = text.children[i].getBoundingClientRect();
+    console.log(text.children[i], textChildCoords);
     textContainer.style.left =
-      letterAccumulator + -textChildCoords.width + 'px';
-    letterAccumulator += -textChildCoords.width;
+      letterAccumulator + -textChildCoords.width.toFixed(2) + 'px';
+    letterAccumulator += -textChildCoords.width.toFixed(2);
   }
 
   function textMovementRight() {
-    textChildCoords = text.children[i].getBoundingClientRect();
-    textContainer.style.left = letterAccumulator + textChildCoords.width + 'px';
-    letterAccumulator += textChildCoords.width;
+    textChildCoords = text.children[i - 1].getBoundingClientRect();
+    console.log(text.children[i], textChildCoords);
+    textContainer.style.left =
+      letterAccumulator + +textChildCoords.width.toFixed(2) + 'px';
+    letterAccumulator += +textChildCoords.width.toFixed(2);
   }
 }
 
