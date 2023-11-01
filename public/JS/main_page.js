@@ -1,27 +1,31 @@
 'use strict';
 
+// запретить выделять текст в typingArea если она есть
+
 import { exceptions } from './utilities/exceptions.js';
 import timer, { timerID } from './utilities/timer.js';
-
-let textNumber = 0;
-
-async function textRequest(screen) {
-  let res = await fetch(
-    'http://localhost:8000/public/JSON/texts_for_typing.json',
-    {
-      method: 'GET',
-    }
-  );
-  let resJson = await res.json();
-  // console.log(resJson.text);
-  console.log(resJson[textNumber].text);
-
-  if (screen) screen.remove();
-  checkTextValidation(resJson[textNumber++].text);
-  autoFocusTypingArea();
-}
+import textRandomizer from './utilities/text_randomizer.js';
+import createText from './utilities/create_text.js';
 
 startTypingText();
+
+let resJson;
+
+async function textRequest(screen) {
+  if (!resJson) {
+    let res = await fetch(
+      'http://localhost:8000/public/JSON/texts_for_typing.json',
+      {
+        method: 'GET',
+      }
+    );
+    resJson = await res.json();
+  }
+
+  if (screen) screen.remove();
+  checkTextValidation(textRandomizer(resJson));
+  autoFocusTypingArea();
+}
 
 function startTypingText() {
   let main = document.getElementById('main-page-main');
@@ -40,54 +44,8 @@ function startTypingText() {
 
   function loadScreen(screen) {
     screen.textContent = 'Ждем загрузки текста...';
+    console.log('from loadScreen');
   }
-}
-
-function createText(textForTyping) {
-  let main = document.getElementById('main-page-main');
-
-  let mainContainer = document.createElement('div');
-  mainContainer.setAttribute('id', 'main-container');
-  mainContainer.setAttribute('class', 'main-container');
-  main.append(mainContainer);
-
-  let textContainer = document.createElement('div');
-  textContainer.setAttribute('id', 'text-container');
-  textContainer.setAttribute('class', 'text-container');
-  mainContainer.append(textContainer);
-
-  let text = document.createElement('div');
-  text.setAttribute('id', 'text');
-  text.setAttribute('class', 'text');
-  textContainer.append(text);
-
-  let letterArr = textForTyping.split('');
-
-  for (let i = 0; i < letterArr.length; i++) {
-    let letter = document.createElement('div');
-    letter.textContent = letterArr[i];
-
-    if (letter.textContent != ' ') {
-      text.append(letter);
-    } else {
-      letter.innerHTML = ' ';
-      text.append(letter);
-    }
-  }
-
-  let typingAreaContainer = document.createElement('div');
-  typingAreaContainer.setAttribute('id', 'typing-area-container');
-  typingAreaContainer.setAttribute('class', 'typing-area-container');
-  mainContainer.append(typingAreaContainer);
-
-  let typingArea = document.createElement('input');
-  typingArea.setAttribute('id', 'typing-area');
-  typingArea.setAttribute('class', 'typing-area');
-  typingArea.setAttribute('type', 'text');
-  typingArea.setAttribute('autocomplete', 'off');
-  typingAreaContainer.append(typingArea);
-
-  return text;
 }
 
 function checkTextValidation(textForTyping) {
@@ -166,7 +124,6 @@ function checkTextValidation(textForTyping) {
 
   function textMovementLeft() {
     textChildCoords = text.children[i].getBoundingClientRect();
-    console.log(text.children[i], textChildCoords);
     textContainer.style.left =
       letterAccumulator + -textChildCoords.width.toFixed(2) + 'px';
     letterAccumulator += -textChildCoords.width.toFixed(2);
@@ -174,7 +131,6 @@ function checkTextValidation(textForTyping) {
 
   function textMovementRight() {
     textChildCoords = text.children[i - 1].getBoundingClientRect();
-    console.log(text.children[i], textChildCoords);
     textContainer.style.left =
       letterAccumulator + +textChildCoords.width.toFixed(2) + 'px';
     letterAccumulator += +textChildCoords.width.toFixed(2);
