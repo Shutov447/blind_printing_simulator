@@ -14,10 +14,18 @@
     <title>Blind printing simulator</title>
   </head>
   <body>
+    <div>
+      <div id="settings-background" class="settings-background"></div>
+      <div id="settings-tab-container" class="settings-tab-container">
+        <div id="settings-tab" class="settings-tab">
+          <p style="height: max-content;">Показывать место для ввода текста: <input type="checkbox" id="see-typing-area" class="see-typing-area"></p>
+        </div>
+      </div>
+    </div>
     <div id="main-page-container" class="main-page-container">
       <header id="main-page-header" class="main-page-header">
         <div id="header-container" class="header-container">
-          <div><a href=""><img src="../IMG/gear.png" alt="настройки" style="width: 27px; height: 27px;"></a></div>
+          <div><button id="settings-btn" class="main-page-btn"><img src="../IMG/gear.png" alt="настройки" style="width: 27px; height: 27px;"></button></div>
         </div>
       </header>
       <main id="main-page-main" class="main-page-main">
@@ -30,6 +38,8 @@
     <script type="module" src="../JS/utilities/create_typing_area.js"></script>
     <script type="module" src="../JS/utilities/create_text.js"></script>
     <script type="module" src="../JS/utilities/text_randomizer.js"></script>
+    <script type="module" src="../JS/utilities/settings_btn.js"></script>
+    <script type="module" src="../JS/utilities/see_typing_area_btn.js"></script>
     <script type="module" src="../JS/main_page.js"></script>
   </body>
 </html>

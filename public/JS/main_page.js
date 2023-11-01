@@ -6,6 +6,7 @@ import { exceptions } from './utilities/exceptions.js';
 import timer, { timerID } from './utilities/timer.js';
 import textRandomizer from './utilities/text_randomizer.js';
 import createText from './utilities/create_text.js';
+import { focusTypingArea, autoFocusTypingArea } from './utilities/focus_typing_area.js';
 
 startTypingText();
 
@@ -135,19 +136,6 @@ function checkTextValidation(textForTyping) {
       letterAccumulator + +textChildCoords.width.toFixed(2) + 'px';
     letterAccumulator += +textChildCoords.width.toFixed(2);
   }
-}
-
-function focusTypingArea() {
-  let typingAreaContainer = document.getElementById('typing-area-container');
-  let typingArea = document.getElementById('typing-area');
-  typingAreaContainer.addEventListener('click', function () {
-    typingArea.focus();
-  });
-}
-
-function autoFocusTypingArea() {
-  let typingArea = document.getElementById('typing-area');
-  typingArea.focus();
 }
 
 function verificationBefore(event, i) {

@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
+  // width: 100vw;
   max-width: 100vw;
   background-color: $backgroundColor;
   color: $fontColor;
@@ -20,6 +20,17 @@ body {
 
   .main-page-header {
     height: max-content;
+    border-bottom: black solid 1px;
+
+    .header-container {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+    }
+
+    .header-container > * {
+      margin: 10px 10px 10px 0;
+    }
   }
 
   .main-page-main {
@@ -55,14 +66,15 @@ body {
       }
 
       .typing-area-container {
-        // position: absolute; // без input
-        position: relative;
+        position: absolute; // без input
+        // position: relative;
         width: 800px;
+        // height: auto;
         border: 2px solid #483d8b;
         border-radius: $fontTypingTextSize;
         padding: 1em 0 1em 0;
-        // z-index: -10; // без input
-      
+        z-index: -9; // без input
+
         .typing-area {
           font-size: $fontTypingTextSize;
           font-family: $fontFamily;
@@ -76,6 +88,7 @@ body {
           padding: 0;
           border-top-left-radius: $fontTypingTextSize;
           border-bottom-left-radius: $fontTypingTextSize;
+          // создать div и покрыть им typing-area-container с z-index и opacity
         }
       }
     }
@@ -105,27 +118,47 @@ body {
   font-size: 1.5em;
 }
 
-// .typing-area-container {
-//   position: absolute;
-//   // position: relative;
-//   width: 800px;
-//   border: 2px solid #483d8b;
-//   border-radius: $fontTypingTextSize;
-//   padding: 1em 0 1em 0;
-//   // z-index: -10;
+.main-page-btn {
+  background-color: $backgroundColor;
+  border: none;
+  padding: 0;
+  -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
 
-//   .typing-area {
-//     font-size: $fontTypingTextSize;
-//     font-family: $fontFamily;
-//     font-weight: 500;
-//     color: #483d8b;
-//     background-color: #f0fff0;
-//     text-align: right;
-//     width: 400px;
-//     border: none;
-//     outline: none;
-//     padding: 0;
-//     border-top-left-radius: $fontTypingTextSize;
-//     border-bottom-left-radius: $fontTypingTextSize;
-//   }
-// }
+.settings-background {
+  display: none;
+  position: absolute;
+  z-index: -10;
+  background-color: black;
+  opacity: 0.5;
+  width: 100vw;
+  height: 100vh;
+}
+
+.settings-tab-container {
+  display: none;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  z-index: -11;
+
+  .settings-tab {
+    display: none;
+    width: 500px;
+    height: 500px;
+    background-color: $backgroundColor;
+    z-index: -12;
+    border: $fontColor solid 1px;
+    border-radius: 10px;
+
+    .see-typing-area {
+    }
+  }
+}

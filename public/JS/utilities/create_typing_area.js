@@ -10,4 +10,25 @@ export default function createTypingArea(mainContainer) {
   typingArea.setAttribute('type', 'text');
   typingArea.setAttribute('autocomplete', 'off');
   typingAreaContainer.append(typingArea);
+
+  let seeTypingAreaBtn = document.getElementById('see-typing-area');
+
+  checkBox(seeTypingAreaBtn, typingAreaContainer);
+  
+  seeTypingAreaBtn.addEventListener('click', function() {
+    checkBox(seeTypingAreaBtn, typingAreaContainer);
+  });
+}
+
+function checkBox(seeTypingAreaBtn, typingAreaContainer) {
+  if (seeTypingAreaBtn.getAttribute('checked')) {
+    typingAreaContainer.setAttribute('style', 'position: relative; z-index: auto;');
+    seeTypingAreaBtn.setAttribute('checked', 'checked');
+
+    return;
+  }
+  
+  console.log('checked есть', seeTypingAreaBtn.getAttribute('checked'));
+  typingAreaContainer.setAttribute('style', 'position: absolute; z-index: -9;');
+  seeTypingAreaBtn.removeAttribute('checked');
 }
