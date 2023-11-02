@@ -77,12 +77,29 @@ let timer = {
 
   endTimer(timerElem) {
     console.log('end');
-    let resultContainer = document.getElementById('result-container');
     let finishTime = document.createElement('div');
     finishTime.setAttribute('id', 'finish-time');
-    finishTime.setAttribute('class', 'finish-time');
-    finishTime.textContent = `${timerElem.textContent}`;
-    resultContainer.append(finishTime);
+    finishTime.setAttribute('class', 'finish-elem');
+    finishTime.textContent = `Время: ${timerElem.textContent}`;
+    this.findResultContainer().append(finishTime);
+  },
+
+  showFinishSpeed(timerElem, textLength) {
+    let [finishMinuts, finishSeconds] = timerElem.textContent.split(':');
+    finishMinuts = +finishMinuts;
+    finishSeconds = +finishSeconds;
+
+    let finishSpeed = document.createElement('div');
+    finishSpeed.setAttribute('id', 'finish-speed');
+    finishSpeed.setAttribute('class', 'finish-elem');
+    finishSpeed.textContent = `Скорость: ${(
+      textLength / (finishMinuts + finishSeconds / 60).toFixed(2)
+    ).toFixed(2)} сим/мин`;
+    this.findResultContainer().append(finishSpeed);
+  },
+
+  findResultContainer() {
+    return document.getElementById('result-container');
   },
 };
 

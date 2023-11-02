@@ -1,0 +1,22 @@
+$fontColor: #483d8b;
+$backgroundColor: #f0fff0;
+$fontTypingTextSize: 2em;
+$fontFamily: 'Montserrat', Arial, Helvetica, sans-serif;
+
+a {
+  border: none;
+  color: $fontColor;
+  text-decoration: none;
+}
+
+a:active {
+  color: $fontColor;
+  border: none;
+  text-decoration: none;
+}
+
+a:visited {
+  color: $fontColor;
+  border: none;
+  text-decoration: none;
+}

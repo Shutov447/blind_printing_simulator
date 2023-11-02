@@ -28,7 +28,6 @@ function checkBox(seeTypingAreaBtn, typingAreaContainer) {
     return;
   }
   
-  console.log('checked есть', seeTypingAreaBtn.getAttribute('checked'));
   typingAreaContainer.setAttribute('style', 'position: absolute; z-index: -9;');
   seeTypingAreaBtn.removeAttribute('checked');
 }

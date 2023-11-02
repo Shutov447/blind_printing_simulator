@@ -13,9 +13,7 @@ body {
   overflow: hidden;
 }
 .main-page-container .main-page-header {
-  height: -moz-max-content;
-  height: max-content;
-  border-bottom: black solid 1px;
+  box-sizing: content-box;
 }
 .main-page-container .main-page-header .header-container {
   display: flex;
@@ -81,8 +79,11 @@ body {
   margin-bottom: 1em;
 }
 .main-page-container .main-page-footer {
-  height: -moz-max-content;
-  height: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  box-sizing: content-box;
 }
 
 .intro {
@@ -90,7 +91,14 @@ body {
   opacity: 0.7;
 }
 
-.result-container .finish-time {
+.result-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+.result-container .finish-elem {
   font-size: 1.5em;
 }
 
@@ -129,10 +137,14 @@ body {
 }
 .settings-tab-container .settings-tab {
   display: none;
-  width: 500px;
-  height: 500px;
+  width: auto;
+  height: 90vh;
+  max-height: 600px;
   background-color: #f0fff0;
   z-index: -12;
   border: #483d8b solid 1px;
   border-radius: 10px;
+}
+.settings-tab-container .settings-tab .settings-item {
+  margin: 10px 10px 0 10px;
 }/*# sourceMappingURL=main_page.css.map */

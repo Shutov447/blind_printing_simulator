@@ -3,7 +3,7 @@
 const http = require('http');
 const fileUpload = require('./custom_node_modules/JS/file_upload.js');
 
-let HOST = 'localhost';
+let HOST = 'rtvsl37' || 'localhost';
 let PORT = 8000;
 
 http

@@ -1,0 +1,17 @@
+a {
+  border: none;
+  color: #483d8b;
+  text-decoration: none;
+}
+
+a:active {
+  color: #483d8b;
+  border: none;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #483d8b;
+  border: none;
+  text-decoration: none;
+}/*# sourceMappingURL=for_all_pages.css.map */

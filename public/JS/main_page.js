@@ -1,6 +1,7 @@
 'use strict';
 
 // запретить выделять текст в typingArea если она есть
+// автоматичнески завершать попытку если прошел час
 
 import { exceptions } from './utilities/exceptions.js';
 import timer, { timerID } from './utilities/timer.js';
@@ -45,7 +46,6 @@ function startTypingText() {
 
   function loadScreen(screen) {
     screen.textContent = 'Ждем загрузки текста...';
-    console.log('from loadScreen');
   }
 }
 
@@ -72,9 +72,9 @@ function checkTextValidation(textForTyping) {
       text.children[i - 1].style.backgroundColor = '#F0FFF0';
       text.children[i - 1].style.color = '#483D8B';
       textMovementRight();
-      verificationBefore(event, i);
+      // verificationBefore(event, i);
       i--;
-      verificationAfter(event, i);
+      // verificationAfter(event, i);
       return;
     }
 
@@ -82,9 +82,9 @@ function checkTextValidation(textForTyping) {
       text.children[i].style.backgroundColor = 'green';
       text.children[i].style.color = 'yellow';
       textMovementLeft();
-      verificationBefore(event, i);
+      // verificationBefore(event, i);
       i++;
-      verificationAfter(event, i);
+      // verificationAfter(event, i);
       removeTypingArea();
       return;
     }
@@ -96,29 +96,32 @@ function checkTextValidation(textForTyping) {
       text.children[i].style.backgroundColor = 'red';
       text.children[i].style.color = 'pink';
       textMovementLeft();
-      verificationBefore(event, i);
+      // verificationBefore(event, i);
       i++;
-      verificationAfter(event, i);
+      // verificationAfter(event, i);
       removeTypingArea();
       return;
     }
   });
 
-  function showResult(timerElem) {
+  function showResult(timerElem, textLength) {
     let main = document.getElementById('main-page-main');
     let resultContainer = document.createElement('div');
     resultContainer.setAttribute('id', 'result-container');
     resultContainer.setAttribute('class', 'result-container');
     main.append(resultContainer);
     timer.endTimer(timerElem);
+    timer.showFinishSpeed(timerElem, textLength);
   }
 
   function removeTypingArea() {
     if (i == text.children.length) {
       clearInterval(timerID);
       let timerElem = document.getElementById('timer');
+      let textLength = document.getElementById('text').children.length;
+      
       mainContainer.remove();
-      showResult(timerElem);
+      showResult(timerElem, textLength);
       startTypingText();
     }
   }

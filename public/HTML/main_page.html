@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../CSS/CSS_reset.css" />
+    <link rel="stylesheet" href="../CSS/for_all_pages.css" />
     <link rel="stylesheet" href="../CSS/main_page.css" />
     <title>Blind printing simulator</title>
   </head>
@@ -18,7 +19,7 @@
       <div id="settings-background" class="settings-background"></div>
       <div id="settings-tab-container" class="settings-tab-container">
         <div id="settings-tab" class="settings-tab">
-          <p style="height: max-content;">Показывать место для ввода текста: <input type="checkbox" id="see-typing-area" class="see-typing-area"></p>
+          <p id="settings-item" class="settings-item">Показывать место для ввода текста: <input type="checkbox" id="see-typing-area" class="see-typing-area"></p>
         </div>
       </div>
     </div>
@@ -31,7 +32,11 @@
       <main id="main-page-main" class="main-page-main">
         <div id="intro" class="intro">Кликните, чтобы начать</div>
       </main>
-      <footer id="main-page-footer" class="main-page-footer">footer</footer>
+      <footer id="main-page-footer" class="main-page-footer">
+        <div>
+          <a href="https://ilibrary.ru" target="_blank">Источник текстов</a>
+        </div>
+      </footer>
     </div>
     <script type="module" src="../JS/utilities/exceptions.js"></script>
     <script type="module" src="../JS/utilities/timer.js"></script>
