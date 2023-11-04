@@ -9,5 +9,4 @@ let PORT = 8000;
 http
   .createServer((req, res) => {
     fileUpload(req.url, res);
-  })
-  .listen(PORT, HOST);
+  }).listen(PORT, HOST);

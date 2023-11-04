@@ -1,3 +1,4 @@
+
 class SymbolVerification {
   before(event, i) {
     console.log(`до ${event.key}: ${i}`);

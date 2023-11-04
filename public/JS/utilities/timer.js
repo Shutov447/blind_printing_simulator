@@ -1,4 +1,5 @@
 import { exceptions } from './exceptions.js';
+import removeTypingArea from './remove_tipyng_area.js';
 // let timerID;
 // class Timer {
 //   constructor() {
@@ -203,6 +204,8 @@ let timer = {
 
       getTime(minutsForTimer, secondsForTimer);
 
+      removeTypingArea();
+
       timerElem.textContent = `${minutsForTimer}:${secondsForTimer}`;
     }
   },
@@ -260,3 +263,4 @@ function getTime(miN, seC) {
 
 export { timerID, min, sec };
 export default timer;
+
