@@ -1,6 +1,8 @@
 import createTypingArea from "./create_typing_area.js";
 
-export default function createText(textForTyping) {
+let text;
+
+function createText(textForTyping) {
   let main = document.getElementById('main-page-main');
 
   let mainContainer = document.createElement('div');
@@ -13,7 +15,7 @@ export default function createText(textForTyping) {
   textContainer.setAttribute('class', 'text-container');
   mainContainer.append(textContainer);
 
-  let text = document.createElement('div');
+  text = document.createElement('div');
   text.setAttribute('id', 'text');
   text.setAttribute('class', 'text');
   textContainer.append(text);
@@ -36,3 +38,7 @@ export default function createText(textForTyping) {
 
   return text;
 }
+
+export { text };
+
+export default createText;
