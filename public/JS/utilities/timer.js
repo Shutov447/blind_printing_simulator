@@ -263,3 +263,4 @@ function getTime(miN, seC) {
 
 export { timerID, min, sec };
 export default timer;
+
