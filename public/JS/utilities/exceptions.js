@@ -1,4 +1,4 @@
-let exceptions = [
+let exceptions = new Set([
   'Shift',
   'Meta',
   'Tab',
@@ -28,7 +28,10 @@ let exceptions = [
   'Home',
   'PrintScreen',
   'ScrollLock',
-];
-exceptions = new Set(exceptions.sort()); // не уверен в полезности этой строки
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowUp',
+  'ArrowDown',
+]);
 
 export {exceptions};

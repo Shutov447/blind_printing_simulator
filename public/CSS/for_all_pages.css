@@ -14,4 +14,9 @@ a:visited {
   color: #483d8b;
   border: none;
   text-decoration: none;
+}
+
+.main-page-container {
+  min-height: 500px;
+  min-width: 500px;
 }/*# sourceMappingURL=for_all_pages.css.map */

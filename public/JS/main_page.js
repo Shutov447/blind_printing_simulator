@@ -1,17 +1,24 @@
 'use strict';
 
-// запретить выделять текст в typingArea если она есть
 // автоматичнески завершать попытку если прошел час
 
 import { exceptions } from './utilities/exceptions.js';
-import timer, { timerID } from './utilities/timer.js';
+import timer, { timerID, min, sec } from './utilities/timer.js';
+// import Timer from './utilities/timer.js';
 import textRandomizer from './utilities/text_randomizer.js';
 import createText from './utilities/create_text.js';
-import { focusTypingArea, autoFocusTypingArea } from './utilities/focus_typing_area.js';
+import {
+  focusTypingArea,
+  autoFocusTypingArea,
+} from './utilities/focus_typing_area.js';
+import SymbolVerification from './utilities/symbol_verification.js';
+import TextMovement from './utilities/text_movement.js';
 
 startTypingText();
 
 let resJson;
+const verification = new SymbolVerification();
+// const timer = new Timer();
 
 async function textRequest(screen) {
   if (!resJson) {
@@ -50,16 +57,19 @@ function startTypingText() {
 }
 
 function checkTextValidation(textForTyping) {
-  let text = createText(textForTyping);
-  timer.createTimer();
-  focusTypingArea();
+  let i = 0;
+
+  const textMovement = new TextMovement(
+    createText(textForTyping),
+    document.getElementById('text-container')
+  );
 
   let mainContainer = document.getElementById('main-container');
   let typingArea = document.getElementById('typing-area');
-  let i = 0;
-  let textContainer = document.getElementById('text-container');
-  let textChildCoords;
-  let letterAccumulator = 0;
+
+  timer.createTimer();
+
+  focusTypingArea();
 
   timer.startTimer();
 
@@ -71,20 +81,20 @@ function checkTextValidation(textForTyping) {
 
       text.children[i - 1].style.backgroundColor = '#F0FFF0';
       text.children[i - 1].style.color = '#483D8B';
-      textMovementRight();
-      // verificationBefore(event, i);
+      textMovement.right(i);
+      verification.before(event, i);
       i--;
-      // verificationAfter(event, i);
+      verification.after(event, i);
       return;
     }
 
     if (event.key == text.children[i].textContent) {
       text.children[i].style.backgroundColor = 'green';
       text.children[i].style.color = 'yellow';
-      textMovementLeft();
-      // verificationBefore(event, i);
+      textMovement.left(i);
+      verification.before(event, i);
       i++;
-      // verificationAfter(event, i);
+      verification.after(event, i);
       removeTypingArea();
       return;
     }
@@ -95,10 +105,10 @@ function checkTextValidation(textForTyping) {
     ) {
       text.children[i].style.backgroundColor = 'red';
       text.children[i].style.color = 'pink';
-      textMovementLeft();
-      // verificationBefore(event, i);
+      textMovement.left(i);
+      verification.before(event, i);
       i++;
-      // verificationAfter(event, i);
+      verification.after(event, i);
       removeTypingArea();
       return;
     }
@@ -115,36 +125,19 @@ function checkTextValidation(textForTyping) {
   }
 
   function removeTypingArea() {
-    if (i == text.children.length) {
+    console.log(+min, +sec);
+    if (i == text.children.length || (+min >= 59 && +sec >= 59) || +min == 60) {
+      // условие на проверку минут и секунд должно выполнятся каждую секунду,
+      // а не при нажатии как это происходит сейчас
+
       clearInterval(timerID);
+
       let timerElem = document.getElementById('timer');
       let textLength = document.getElementById('text').children.length;
-      
+
       mainContainer.remove();
       showResult(timerElem, textLength);
       startTypingText();
     }
   }
-
-  function textMovementLeft() {
-    textChildCoords = text.children[i].getBoundingClientRect();
-    textContainer.style.left =
-      letterAccumulator + -textChildCoords.width.toFixed(2) + 'px';
-    letterAccumulator += -textChildCoords.width.toFixed(2);
-  }
-
-  function textMovementRight() {
-    textChildCoords = text.children[i - 1].getBoundingClientRect();
-    textContainer.style.left =
-      letterAccumulator + +textChildCoords.width.toFixed(2) + 'px';
-    letterAccumulator += +textChildCoords.width.toFixed(2);
-  }
-}
-
-function verificationBefore(event, i) {
-  console.log(`до ${event.key}: ${i}`);
-}
-
-function verificationAfter(event, i) {
-  console.log(`после ${event.key}: ${i}`);
 }
