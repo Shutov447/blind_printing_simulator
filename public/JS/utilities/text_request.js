@@ -1,6 +1,6 @@
 import checkTextValidation from './check_text_validation.js';
 import textRandomizer from './text_randomizer.js';
-import { focusTypingArea, autoFocusTypingArea } from './focus_typing_area.js';
+import { autoFocusTypingArea } from './focus_typing_area.js';
 
 let resJson;
 

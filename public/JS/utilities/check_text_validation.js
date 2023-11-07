@@ -1,34 +1,24 @@
 import { exceptions } from './exceptions.js';
 import timer from './timer.js';
 import createText from './create_text.js';
-import { focusTypingArea, autoFocusTypingArea } from './focus_typing_area.js';
+import { focusTypingArea } from './focus_typing_area.js';
 import TextMovement from './text_movement.js';
 import SymbolVerification from './symbol_verification.js';
 import removeTypingArea from './remove_tipyng_area.js';
 
 const verification = new SymbolVerification();
-let i = 0;
-
-// let obj = {i: 0};
-
-// Object.defineProperty(new Number, 'i', {
-//   enumerable: false,
-//   configurable: false,
-//   writable: false,
-//   value: 0,
-// });
-
-// let i = obj.i;
+let finish;
+let i;
 
 function checkTextValidation(textForTyping) {
-  // let i = 0;
+  finish = false;
+  i = 0;
 
   const textMovement = new TextMovement(
     createText(textForTyping),
     document.getElementById('text-container')
   );
 
-  // let mainContainer = document.getElementById('main-container');
   let typingArea = document.getElementById('typing-area');
 
   timer.createTimer();
@@ -59,10 +49,12 @@ function checkTextValidation(textForTyping) {
       verification.before(event, i);
       i++;
       verification.after(event, i);
-      // removeTypingArea();
-      if (removeTypingArea()) {
+
+      if (removeTypingArea(finish)) {
         i = 0;
+        finish = false;
       }
+
       return;
     }
 
@@ -76,10 +68,12 @@ function checkTextValidation(textForTyping) {
       verification.before(event, i);
       i++;
       verification.after(event, i);
-      // removeTypingArea();
-      if (removeTypingArea()) {
+
+      if (removeTypingArea(finish)) {
         i = 0;
+        finish = false;
       }
+
       return;
     }
   });

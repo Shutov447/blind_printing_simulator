@@ -14,6 +14,7 @@ let settingsLayouts = [
       settingsLayouts[i].style.display = 'flex';
       settingsLayouts[i].style.zIndex = -zIndexForSettings--;
     }
+    
     zIndexForSettings = 10;
   });
 
@@ -26,6 +27,7 @@ let settingsLayouts = [
       settingsLayouts[i].style.display = 'none';
       settingsLayouts[i].style.zIndex = -zIndexForSettings++;
     }
+
     zIndexForSettings = -10;
   });
 })();

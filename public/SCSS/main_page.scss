@@ -85,12 +85,20 @@ body {
           padding: 0;
           border-top-left-radius: $fontTypingTextSize;
           border-bottom-left-radius: $fontTypingTextSize;
-          // создать div и покрыть им typing-area-container с z-index и opacity
           position: relative;
           width: 30vw;
           min-width: 200px;
           max-width: 400px;
         }
+      }
+
+      .non-allocated {
+        position: absolute;
+        height: 75px;
+        width: 100vw;
+        opacity: 0;
+        z-index: 10;
+        margin: 0;
       }
     }
 

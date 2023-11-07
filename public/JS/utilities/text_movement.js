@@ -1,4 +1,3 @@
-
 class TextMovement {
   constructor(text, textContainer) {
     this.textContainer = textContainer;

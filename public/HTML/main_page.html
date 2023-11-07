@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -16,22 +15,22 @@
     <title>Blind printing simulator</title>
   </head>
   <body>
-    <div>
-      <div id="settings-background" class="settings-background"></div>
-      <div id="settings-tab-container" class="settings-tab-container">
-        <div id="settings-tab" class="settings-tab">
-          <p id="settings-item" class="settings-item">
-            Показывать место для ввода текста:
-            <input
-              type="checkbox"
-              id="see-typing-area"
-              class="see-typing-area"
-            />
-          </p>
+    <div id="main-page-container" class="main-page-container">
+      <div>
+        <div id="settings-background" class="settings-background"></div>
+        <div id="settings-tab-container" class="settings-tab-container">
+          <div id="settings-tab" class="settings-tab">
+            <p id="settings-item" class="settings-item">
+              Показывать место для ввода текста:
+              <input
+                type="checkbox"
+                id="see-typing-area"
+                class="see-typing-area"
+              />
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="main-page-container" class="main-page-container">
       <header id="main-page-header" class="main-page-header">
         <div id="header-container" class="header-container">
           <div>
@@ -59,10 +58,11 @@
     <script type="module" src="../JS/utilities/create_typing_area.js"></script>
     <script type="module" src="../JS/utilities/create_text.js"></script>
     <script type="module" src="../JS/utilities/text_randomizer.js"></script>
-    <script type="module" src="../JS/utilities/settings_btn.js"></script>
-    <script type="module" src="../JS/utilities/see_typing_area_btn.js"></script>
     <script type="module" src="../JS/utilities/text_movement.js"></script>
-    <script type="module" src="../JS/utilities/check_text_validation.js"></script>
+    <script
+    type="module"
+    src="../JS/utilities/check_text_validation.js"
+    ></script>
     <script type="module" src="../JS/utilities/symbol_verification.js"></script>
     <script type="module" src="../JS/utilities/create_typing_area.js"></script>
     <script type="module" src="../JS/utilities/focus_typing_area.js"></script>
@@ -70,5 +70,7 @@
     <script type="module" src="../JS/utilities/text_request.js"></script>
     <script type="module" src="../JS/utilities/show_result.js"></script>
     <script type="module" src="../JS/main_page.js"></script>
+    <script type="module" src="../JS/utilities/settings_btn.js"></script>
+    <script type="module" src="../JS/utilities/see_typing_area_btn.js"></script>
   </body>
 </html>

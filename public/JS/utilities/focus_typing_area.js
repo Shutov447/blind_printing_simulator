@@ -1,12 +1,12 @@
 function focusTypingArea() {
   let typingArea = document.getElementById('typing-area');
-  let typingAreaContainer = document.getElementById('typing-area-container');
+  let nonAllocated = document.getElementById('non-allocated');
   let textContainer = document.getElementById('text-container');
 
-  typingAreaContainer.addEventListener('click', function () {
+  nonAllocated.addEventListener('click', function () {
     typingArea.focus();
   });
-  
+
   textContainer.addEventListener('click', function () {
     typingArea.focus();
   });
@@ -17,4 +17,4 @@ function autoFocusTypingArea() {
   typingArea.focus();
 }
 
-export {focusTypingArea, autoFocusTypingArea};
+export { focusTypingArea, autoFocusTypingArea };

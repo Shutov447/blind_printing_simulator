@@ -25,3 +25,9 @@ a:visited {
   min-height: 500px;
   min-width: 500px;
 }
+
+@media screen and (height <= 500px) {
+  .main-page-container {
+    overflow-y: scroll;
+  }
+}
