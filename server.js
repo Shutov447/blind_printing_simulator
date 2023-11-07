@@ -9,4 +9,5 @@ let HOSTNAME = process.env.HOSTNAME ?? 'localhost';
 http
   .createServer((req, res) => {
     fileUpload(req.url, res);
-  }).listen(PORT, HOSTNAME);
+  })
+  .listen(PORT, HOSTNAME);

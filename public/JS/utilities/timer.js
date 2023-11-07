@@ -101,7 +101,8 @@ let timer = {
     finishSpeed.setAttribute('id', 'finish-speed');
     finishSpeed.setAttribute('class', 'finish-elem');
     finishSpeed.textContent = `Скорость: ${(
-      textLength / (+finishMinuts + (+finishSeconds / 60).toFixed(2))
+      textLength /
+      (+finishMinuts + +(finishSeconds / 60).toFixed(2))
     ).toFixed(2)} сим/мин`;
     this.findResultContainer().append(finishSpeed);
   },
