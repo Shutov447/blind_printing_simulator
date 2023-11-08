@@ -7,7 +7,7 @@ let resJson;
 async function textRequest(screen) {
   if (!resJson) {
     let res = await fetch(
-      'http://localhost:8000/public/JSON/texts_for_typing.json',
+      'http://localhost:80/public/JSON/texts_for_typing.json',
       {
         method: 'GET',
       }
