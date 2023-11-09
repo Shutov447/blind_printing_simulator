@@ -9,11 +9,11 @@ async function textRequest(screen) {
     let res = await fetch(
       'http://5.35.13.205/public/JSON/texts_for_typing.json',
       {
-        headers: {
-          'Access-Control-Allow-Origin': 'blindprintingsimulator.ru',
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization',
-        },
+        // headers: {
+        //   'Access-Control-Allow-Origin': 'blindprintingsimulator.ru',
+        //   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        //   'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+        // },
         method: 'GET',
       }
     );
