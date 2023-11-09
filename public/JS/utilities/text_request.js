@@ -7,7 +7,7 @@ let resJson;
 async function textRequest(screen) {
   if (!resJson) {
     let res = await fetch(
-      'http://5.35.13.205/public/JSON/texts_for_typing.json',
+      'http://blindprintingsimulator.ru/public/JSON/texts_for_typing.json',
       {
         // headers: {
         //   'Access-Control-Allow-Origin': 'blindprintingsimulator.ru',
